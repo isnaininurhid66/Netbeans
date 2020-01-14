@@ -1,0 +1,216 @@
+package Peminjaman;
+import static Peminjaman.Main.mobil;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.Scanner;
+import java.io.FileReader;
+import java.text.DecimalFormat;
+
+
+public class Main {
+    int hari;
+    int harga;
+    int sewa;
+    int mobil;
+
+        public Main(int sewa){ 
+        this.sewa=sewa;  
+        DecimalFormat df = new DecimalFormat("#,###,##0");
+        df = new DecimalFormat("#,###,##0");
+        String rupiah = "Sewa Perhari Rp "+df.format(sewa);
+        System.out.println(rupiah);
+    } 
+//    konstructor over loading rental untuk mobil
+       public Main (int mobil,int hari){    
+        this.mobil=mobil;   
+        DecimalFormat df = new DecimalFormat("#,###,##0");
+        df = new DecimalFormat("#,###,##0");
+        String rupiah = "Sewa Perhari Rp "+df.format(mobil);
+        System.out.println(rupiah);
+    }
+       
+       
+  public static void main(String[] args) throws IOException{
+      Scanner terminalInput = new Scanner(System.in);
+      String pilihanUser;
+      Boolean isLanjut = true;
+      
+      while(isLanjut){
+       System.out.println("======================");
+       System.out.println("Rental Kendaraan \n");
+       System.out.println("1.\t Harga Rental Motor \n");
+       System.out.println("2.\t Harga Rental Mobil \n");
+       System.out.println("3.\t Rental Motor \n");
+       System.out.println("4.\t Rental Mobil \n");
+       System.out.print(" Pilihan Anda: ");
+       pilihanUser = terminalInput.next();
+       
+       switch(pilihanUser) {
+           case "1" :
+               hargamotor();
+               break;
+           case "2" :
+               hargamobil();
+               break;
+           case "3" :
+               motor();
+               break;
+            case "4" :
+                mobil();
+
+            default :
+                System.out.println("\n Inputan anda tidak ditemukan");
+        }
+      isLanjut = getYesorNo ("Apakah Anda Ingin Melanjutkan");  
+    }
+  }
+  
+  
+      public static void motor(){
+        
+        Scanner input = new Scanner(System.in);
+        Scanner terminalInput = new Scanner(System.in);
+        String pilihanUser;
+            System.out.println("======================");
+            System.out.println("Pilih Jenis Motor");
+            System.out.println("======================");
+            System.out.println("1.Honda vario");
+            System.out.println("2.Honda beat");
+            System.out.println("3.Yamaha Nmax");
+            System.out.print("Masukka pilihan : ");
+            int pilih=input.nextInt();
+            switch(pilih){
+                case 1:
+                   Main  vario=new Main(80000);
+                    vario.tampilmotor();
+                  break;
+                    case 2:
+                    Main beat=new Main(70000);
+                    beat.tampilmotor();
+                  break;
+                    case 3:
+                       Main Nmax=new Main(90000);
+                        Nmax.tampilmotor();
+                        break;
+                          default :
+                System.out.println("\n Inputan anda tidak ditemukan");
+        }
+}
+      
+      
+       public static void mobil(){
+        Scanner input = new Scanner(System.in);
+        String pilihanUser;   
+            
+            System.out.println("======================");
+            System.out.println("Pilih Mobil ");
+            System.out.println("======================");
+            System.out.println("1.Avanza");
+            System.out.println("2.Senia");
+            System.out.println("3.Jazz");
+            System.out.print("Masukka pilihan : ");
+            int pilih2=input.nextInt();
+            switch(pilih2){
+                    case 1:
+                     Main avanza=new Main(400000,1);
+                     avanza.tampilmobil();
+                  break;
+                    case 2:
+                    Main senia=new Main(300000,1);
+                    senia.tampilmobil();
+                  break;
+                    case 3:
+                        Main jazz=new Main(350000,1);
+                        jazz.tampilmobil();
+                        break;  
+               
+                          default :
+                System.out.println("\n Inputan anda tidak ditemukan");
+        }
+            
+    }
+       
+       
+       void tampilmotor(){
+        int jumlahharir2;
+        Scanner input = new Scanner(System.in);
+        System.out.print("lama sewa: ");
+        int jmhari=input.nextInt();
+        jumlahharir2=jmhari*sewa;
+        DecimalFormat df = new DecimalFormat("#,###,##0");
+        df = new DecimalFormat("#,###,##0");
+        System.out.println("======================");
+        System.out.println("Anda memilih motor");
+        System.out.println("Lama Penyewaan " + jmhari + " Hari");
+        String rupiah = "Dengan harga sewa : Rp "+df.format(jumlahharir2);
+        System.out.println(rupiah);
+        System.out.println("======================");
+    }
+       
+       
+    void tampilmobil(){
+        int jumlahhari;
+    
+        Scanner input = new Scanner(System.in);
+        System.out.print("Lama sewa :");
+        int jmhari=input.nextInt();
+        jumlahhari=(int) (jmhari*mobil);
+        DecimalFormat df = new DecimalFormat("#,###,##0");
+        df = new DecimalFormat("#,###,##0");    
+        System.out.println("======================");
+        System.out.println("Anda memilih Mobil" );
+        System.out.println("Lama Penyewaan " + jmhari + " Hari");
+        String rupiah = "Dengan harga sewa : Rp "+df.format(jumlahhari);
+        System.out.println(rupiah);
+        System.out.println("======================");
+    }
+
+    
+    private static boolean getYesorNo(String massage){
+         Scanner terminalInput = new Scanner(System.in);
+         System.out.print("\n" +massage+"(y/n) ? ");
+         String pilihanUser = terminalInput.next();
+         
+         while(!pilihanUser.equalsIgnoreCase("y") && !pilihanUser.equalsIgnoreCase("n"))
+         {
+         System.err.println("Pilihan Anda Bukan y atau n");
+         System.out.println("\n" +massage+"(y/n)");
+             pilihanUser = terminalInput.next();
+         }
+         return pilihanUser.equalsIgnoreCase("y");
+     }
+    private static void hargamotor() throws IOException {
+        FileReader fileInput;
+        BufferedReader bufferInput;
+        try {
+            fileInput = new FileReader("src/Peminjaman/motor.txt");
+            bufferInput = new BufferedReader(fileInput);
+        }
+        catch(IOException e) {
+            System.err.println("Database Ditemukan");
+            System.err.println("Database Tidak Ditemukan");
+            return;
+        }
+      String data;
+        while ((data = bufferInput.readLine())!= null){
+        System.out.println(data);
+    }
+    }
+    private static void hargamobil() throws IOException {
+        FileReader fileInput;
+        BufferedReader bufferInput;
+        try {
+            fileInput = new FileReader("src/peminjaman/mobil.txt");
+            bufferInput = new BufferedReader(fileInput);
+        }
+        catch(IOException e) {
+            System.err.println("Database Ditemukan");
+            System.err.println("Database Tidak Ditemukan");
+            return;
+        }
+      String data;
+        while ((data = bufferInput.readLine())!= null){
+        System.out.println(data);
+    }
+    }
+}
